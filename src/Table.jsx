@@ -18,6 +18,10 @@ export default class TableUser extends React.Component {
         })
     }
 
+    delete(event){
+       axios.delete('http://localhost:4000/user/'+event.target.value)
+    }
+
    
 
     render() {
@@ -39,6 +43,11 @@ export default class TableUser extends React.Component {
                             </td>
                             <td>
                                 {user.password}
+                            </td>
+                            <td>
+                                <button onClick={this.delete} value={user.id} >delete</button>
+                                <button  ><a href={`update/${user.id}`}>update</a></button>
+
                             </td>
                         </tr>
                      )

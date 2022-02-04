@@ -4,8 +4,7 @@ import FormUser from "./Form";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import {Navbar , NavDropdown , Nav , Container} from 'react-bootstrap'
 import TableUser from "./Table";
-import axios from "axios";
-
+import UpdateUser from "./Update";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -53,6 +52,8 @@ export default class App extends React.Component {
           <Routes>
                  <Route exact path='/' element={< FormUser />}></Route>
                  <Route exact path='/table' element={< TableUser />}></Route>
+                 <Route exact path='/update/:id' element={< UpdateUser />}></Route>
+
           </Routes>
         </div>
       </Router>

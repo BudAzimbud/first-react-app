@@ -43,7 +43,7 @@ export default class FormUser extends React.Component {
         <Form> 
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" onChange={this.onChangeUsername}/>
+            <Form.Control type="email" placeholder="Enter email" onChange={this.onChangeUsername} />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
@@ -53,12 +53,12 @@ export default class FormUser extends React.Component {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" onChange={this.onChangePassword} />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
+
+
           <Button variant="primary" onClick={this.handleSubmit}>
             Submit
           </Button>
+
         </Form>
       </div>
     );
