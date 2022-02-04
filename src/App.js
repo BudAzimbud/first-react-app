@@ -1,68 +1,61 @@
 import "./App.css";
-import {Form ,Button} from 'react-bootstrap'
-import React from 'react'
-import axios from 'axios'
+import React from "react";
+import FormUser from "./Form";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {Navbar , NavDropdown , Nav , Container} from 'react-bootstrap'
+import TableUser from "./Table";
+import axios from "axios";
 
 
 export default class App extends React.Component {
-
-  constructor(props){
-    super(props)
-    this.state = {
-      username : '',
-      password : ''
-    }
-
-    this.onChangeUsername = this.onChangeUsername.bind(this)
-    this.onChangePassword = this.onChangePassword.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    
+  constructor(props) {
+    super(props);
   }
 
-  onChangeUsername(event){
-    this.setState({
-      username : event.target.value
-    })
-  }
 
-  onChangePassword(event){
-    this.setState({
-      password : event.target.value
-    })
-  }
-  handleSubmit() {
-    axios.post('http://localhost:4000/user',{
-      username : this.state.username ,
-      password : this.state.password
-    })
-  }
-
-  render(){
+  render() {
     return (
-      <div className="App">
-        <Form> 
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" onChange={this.onChangeUsername}/>
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-  
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" onChange={this.onChangePassword} />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
-          <Button variant="primary" onClick={this.handleSubmit}>
-            Submit
-          </Button>
-        </Form>
-      </div>
+      <Router>
+        <div className="App">
+          <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Container>
+              <Navbar.Brand href="#home">Header</Navbar.Brand>
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="me-auto">
+                  <Nav.Link href="/">Input</Nav.Link>
+                  <Nav.Link href="/table">Table</Nav.Link>
+                  <NavDropdown title="menu drop" id="collasible-nav-dropdown">
+                    <NavDropdown.Item href="#action/3.1">
+                      Action
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.2">
+                      Another action
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.3">
+                      Something
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#action/3.4">
+                      Separated link
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+                <Nav>
+                  <Nav.Link href="#deets">More deets</Nav.Link>
+                  <Nav.Link eventKey={2} href="#memes">
+                    Dank memes
+                  </Nav.Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+          <Routes>
+                 <Route exact path='/' element={< FormUser />}></Route>
+                 <Route exact path='/table' element={< TableUser />}></Route>
+          </Routes>
+        </div>
+      </Router>
     );
   }
-
 }
-
