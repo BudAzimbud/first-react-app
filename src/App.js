@@ -53,7 +53,6 @@ export default class App extends React.Component {
                  <Route exact path='/' element={< FormUser />}></Route>
                  <Route exact path='/table' element={< TableUser />}></Route>
                  <Route exact path='/update/:id' element={< UpdateUser />}></Route>
-
           </Routes>
         </div>
       </Router>
