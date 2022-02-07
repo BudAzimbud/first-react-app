@@ -43,9 +43,6 @@ export default class TableUser extends React.Component {
                   delete
                 </button>
                 <ConfirmDelete id={user.id} />
-                {/* <button>
-                  <a href={`update/${user.id}`}>update</a>
-                </button> */}
               </td>
             </tr>
           ))}
