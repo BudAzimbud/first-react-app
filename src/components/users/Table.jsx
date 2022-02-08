@@ -39,6 +39,10 @@ export default class TableUser extends React.Component {
                 <td>
                   <ConfirmDelete id={user.id} />
                 </td>
+                <td>
+                  <a href={"update/"+user.id}>edit</a>
+                </td>
+                <td></td>
               </tr>
             ))}
           </tbody>

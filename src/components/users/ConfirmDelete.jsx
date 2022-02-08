@@ -13,9 +13,13 @@ export default function ConfirmDelete(props) {
     event.preventDefault();
     console.log("hello");
     console.log(props.id);
-    axios.delete("http://localhost:4000/user/" + props.id);
-    refreshPage();
-    setShow(false);
+    axios
+      .delete("http://localhost:4000/user/" + props.id)
+      .then((res) => {
+        refreshPage();
+        setShow(false);
+      })
+      .catch((err) => console.log(err));
   };
 
   const refreshPage = () => {

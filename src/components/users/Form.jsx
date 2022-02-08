@@ -2,14 +2,19 @@ import { Form, Button } from "react-bootstrap";
 import React from "react";
 import axios from "axios";
 import "./Form.css";
+import { useNavigate } from "react-router-dom";
+import { createBrowserHistory } from "history";
+const history = createBrowserHistory();
 
-export default class FormUser extends React.Component {
+class FormSubUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      state: () => {},
       username: "",
       password: "",
       isEneble: true,
+      selectedFile: null,
     };
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -28,16 +33,40 @@ export default class FormUser extends React.Component {
       password: event.target.value,
     });
   }
+
+  goToUserTable() {
+    history.push("/table", { replace: true });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    alert(this.state);
+
+    // Create an object of formData
+    const formData = new FormData();
+
+    formData.append("file", this.state.selectedFile);
+    console.log(formData);
+
     axios
-      .post("http://localhost:4000/user", {
-        username: this.state.username,
-        password: this.state.password,
+      .post("http://localhost:8080/companies/file", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // axios
+    //   .post("http://localhost:4000/user", {
+    //     username: this.state.username,
+    //     password: this.state.password,
+    //   })
+    //   .then((res) => {
+    //     console.log(this.state);
+    //     this.goToUserTable();
+    //   })
+    //   .catch((err) => console.log(err));
   }
 
   render() {
@@ -47,6 +76,7 @@ export default class FormUser extends React.Component {
           onSubmit={(event) => {
             this.handleSubmit(event);
           }}
+          encType="multipart/form-data"
         >
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
@@ -69,6 +99,16 @@ export default class FormUser extends React.Component {
             />
           </Form.Group>
 
+          <Form.Group className="mb-3" controlId="formBasicFile">
+            <Form.Control
+              type="file"
+              onChange={(e) => {
+                console.log(e.target.files[0]);
+                this.setState({ selectedFile: e.target.files[0] });
+              }}
+            />
+          </Form.Group>
+
           <Button variant="primary" type="submit">
             Submit
           </Button>
@@ -76,4 +116,10 @@ export default class FormUser extends React.Component {
       </div>
     );
   }
+}
+
+export default function FormUser() {
+  let navigate = useNavigate();
+
+  return <FormSubUser navigate={navigate} />;
 }
