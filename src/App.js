@@ -1,10 +1,12 @@
 import "./App.css";
 import React from "react";
-import FormUser from "./Form";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import {Navbar , NavDropdown , Nav , Container} from 'react-bootstrap'
-import TableUser from "./Table";
-import UpdateUser from "./Update";
+
+import TableUser from "./components/users/Table";
+import UpdateUser from "./components/users/Update";
+import FormUser from "./components/users/Form";
+import LoginComponent from "./components/Login";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,14 +19,18 @@ export default class App extends React.Component {
       <Router>
         <div className="App">
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+              <Navbar.Brand className="logo" href="#home">Logo</Navbar.Brand>
+
             <Container>
-              <Navbar.Brand href="#home">Header</Navbar.Brand>
+
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
                   <Nav.Link href="/">Input</Nav.Link>
                   <Nav.Link href="/table">Table</Nav.Link>
-                  <NavDropdown title="menu drop" id="collasible-nav-dropdown">
+
+                  <NavDropdown title="more" id="collasible-nav-dropdown">
                     <NavDropdown.Item href="#action/3.1">
                       Action
                     </NavDropdown.Item>
@@ -41,10 +47,15 @@ export default class App extends React.Component {
                   </NavDropdown>
                 </Nav>
                 <Nav>
-                  <Nav.Link href="#deets">More deets</Nav.Link>
-                  <Nav.Link eventKey={2} href="#memes">
-                    Dank memes
+
+                  <Nav.Link href="/register">
+                    Register
                   </Nav.Link>
+
+                  <Nav.Link eventKey={2} href="/login">
+                    Login
+                  </Nav.Link>
+
                 </Nav>
               </Navbar.Collapse>
             </Container>
@@ -53,6 +64,8 @@ export default class App extends React.Component {
                  <Route exact path='/' element={< FormUser />}></Route>
                  <Route exact path='/table' element={< TableUser />}></Route>
                  <Route exact path='/update/:id' element={< UpdateUser />}></Route>
+                 <Route exact path='/login' element={< LoginComponent />}></Route>
+
           </Routes>
         </div>
       </Router>

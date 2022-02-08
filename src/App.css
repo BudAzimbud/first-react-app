@@ -3,3 +3,12 @@
   margin: auto;
 }
 
+.logo {
+  margin-left: auto;
+}
+
+@media only screen and (max-width: 1300px) {
+  .logo {
+    display: none;
+  }
+}
